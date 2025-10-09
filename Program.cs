@@ -1,3 +1,6 @@
+using GetFit_Application.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GetFit_Application
 {
     public class Program
@@ -8,6 +11,7 @@ namespace GetFit_Application
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<HealthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
             var app = builder.Build();
 
