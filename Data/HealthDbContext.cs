@@ -7,8 +7,8 @@ namespace GetFit_Application.Data
     {
         public HealthDbContext(DbContextOptions<HealthDbContext> options) : base(options)  {  }
         //Sepersate the models so that each database is interacted with independently
-        DbSet<Diet> Diets { get; set; }
-        DbSet<Workout> Workouts { get; set; }
+       public DbSet<Diet> Diets { get; set; }
+       public DbSet<Workout> Workouts { get; set; }
     }
 }
    
