@@ -1,6 +1,7 @@
 ﻿using GetFit_Application.Data;
+using System.Linq;
 using GetFit_Application.Models;
-using GetFit_Application.
+using GetFit_Application.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -38,5 +39,21 @@ namespace GetFit_Application.Controllers
             return View(workouts);
 
         }
+
+        //Finds details for a single diet by id
+        public async Task<IActionResult> DietDetils(int Id)
+        {
+            var diet = await _context.Diets.FirstOrDefaultAsync();
+            if (diet == null)
+            {
+                return NotFound();
+                
+            }
+            return View(diet);
+        }
+
+
+
+
     }
 }
