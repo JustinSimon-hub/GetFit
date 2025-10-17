@@ -47,13 +47,164 @@ namespace GetFit_Application.Controllers
             if (diet == null)
             {
                 return NotFound();
-                
+
             }
             return View(diet);
         }
 
+        //Retrieve a single workout by id
+        [HttpGet]
+        public async Task<IActionResult> SingleWorkoutDetails (int id)
+        {
+            var workout = await _context.Workouts.FirstOrDefaultAsync(w => w.Id == id);
+            if(workout == null)
+            {
+                return NotFound();
+            }
+            return View(workout);
+        }
+
+       //Create a Diet entry
+        [HttpGet]
+        public  async Task<IActionResult> CreateDiet()
+        {
+            return View();
 
 
+        }
 
+        //Create Diet *Post 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDiet(Diet diet)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Diets.Add(diet);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Diet));
+            }
+            return View(diet);
+        }
+
+        //Create a Workout entry
+        public async Task<IActionResult> CreateWorkout()
+        {
+            return View();
+        }
+
+
+        //Create Workout *Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateWorkout(Workout workout)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Workouts.Add(workout);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Workout));
+            }
+            return View(workout);
+        }
+
+
+        // EDIT DIET
+        [HttpGet]
+        public async Task<IActionResult> EditDiet(int id)
+        {
+            var diet = await _context.Diets.FindAsync(id);
+            if (diet == null)
+                return NotFound();
+            return View(diet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDiet(int id, Diet diet)
+        {
+            if (id != diet.Id)
+                return BadRequest();
+
+            if (ModelState.IsValid)
+            {
+                _context.Entry(diet).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Diets));
+            }
+            return View(diet);
+        }
+
+        // DELETE DIET
+        [HttpGet]
+        public async Task<IActionResult> DeleteDiet(int id)
+        {
+            var diet = await _context.Diets.FindAsync(id);
+            if (diet == null)
+                return NotFound();
+            return View(diet);
+        }
+
+        [HttpPost, ActionName("DeleteDiet")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteDietConfirmed(int id)
+        {
+            var diet = await _context.Diets.FindAsync(id);
+            if (diet != null)
+            {
+                _context.Diets.Remove(diet);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Diets));
+        }
+
+        // EDIT WORKOUT
+        [HttpGet]
+        public async Task<IActionResult> EditWorkout(int id)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+            if (workout == null)
+                return NotFound();
+            return View(workout);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditWorkout(int id, Workout workout)
+        {
+            if (id != workout.Id)
+                return BadRequest();
+
+            if (ModelState.IsValid)
+            {
+                _context.Entry(workout).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Workouts));
+            }
+            return View(workout);
+        }
+
+        // DELETE WORKOUT
+        [HttpGet]
+        public async Task<IActionResult> DeleteWorkout(int id)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+            if (workout == null)
+                return NotFound();
+            return View(workout);
+        }
+
+        [HttpPost, ActionName("DeleteWorkout")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteWorkoutConfirmed(int id)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+            if (workout != null)
+            {
+                _context.Workouts.Remove(workout);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Workouts));
+        }
     }
 }
