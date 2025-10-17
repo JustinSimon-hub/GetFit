@@ -13,13 +13,20 @@ namespace GetFit_Application.Controllers
         private readonly HealthDbContext _context;
         public HealthController(HealthDbContext context)
         {
-            _context = context;
-        }
+            _context = context;        }
 
          //Responsible for displaying main index view 
         public IActionResult Index()
         {
-            return View();
+            //Including the viewModel properties to include multi modeling inside Views 
+            var diets = _context.Diets.ToList();
+            var workouts = _context.Workouts.ToList();
+            var viewModel = new GymViewModel
+            {
+                Diets = diets,
+                Workouts = workouts
+            };
+            return View(viewModel);
 
         }
 
