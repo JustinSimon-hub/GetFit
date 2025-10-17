@@ -1,7 +1,7 @@
-﻿@model IEnumerable<GetFit_Application.Models.Diet>
+﻿@model GetFit_Application.Models.GymViewModel
 
 @{
-    ViewData["Title"] = "Diets";
+    ViewData["Title"] = "Dashboard";
 }
 
 <h2>Diets</h2>
@@ -16,16 +16,44 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var diet in Model.Diets)
         {
             <tr>
-                <td>@item.Food</td>
-                <td>@item.Calories</td>
-                <td>@item.Protein</td>
+                <td>@diet.Food</td>
+                <td>@diet.Calories</td>
+                <td>@diet.Protein</td>
                 <td>
-                    <a asp-action="DietDetils" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="EditDiet" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="DeleteDiet" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="DietDetils" asp-route-id="@diet.Id">Details</a> |
+                    <a asp-action="EditDiet" asp-route-id="@diet.Id">Edit</a> |
+                    <a asp-action="DeleteDiet" asp-route-id="@diet.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Workouts</h2>
+<a asp-action="CreateWorkout">Create New Workout</a>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var workout in Model.Workouts)
+        {
+            <tr>
+                <td>@workout.Exercise</td>
+                <td>@workout.Date.ToShortDateString()</td>
+                <td>@workout.PR</td>
+                <td>
+                    <a asp-action="SingleWorkoutDetails" asp-route-id="@workout.Id">Details</a> |
+                    <a asp-action="EditWorkout" asp-route-id="@workout.Id">Edit</a> |
+                    <a asp-action="DeleteWorkout" asp-route-id="@workout.Id">Delete</a>
                 </td>
             </tr>
         }
