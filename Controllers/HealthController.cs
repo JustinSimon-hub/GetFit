@@ -31,7 +31,7 @@ namespace GetFit_Application.Controllers
         }
 
         //Reponsible for listing all diets within db 
-        public async Task<IActionResult> Diets()
+        public async Task<IActionResult> GetDiets()
         {
             var diets = await _context.Diets.ToListAsync();
             return View(diets);
@@ -40,7 +40,7 @@ namespace GetFit_Application.Controllers
 
 
         //Responsible for listing all workouts within the db
-        public async Task<IActionResult> Workouts()
+        public async Task<IActionResult> GetWorkouts()
         {
             var workouts = await _context.Workouts.ToListAsync();
             return View(workouts);
@@ -48,7 +48,7 @@ namespace GetFit_Application.Controllers
         }
 
         //Finds details for a single diet by id
-        public async Task<IActionResult> DietDetils(int Id)
+        public async Task<IActionResult> GetDietDetils(int Id)
         {
             var diet = await _context.Diets.FirstOrDefaultAsync();
             if (diet == null)
@@ -61,7 +61,7 @@ namespace GetFit_Application.Controllers
 
         //Retrieve a single workout by id
         [HttpGet]
-        public async Task<IActionResult> SingleWorkoutDetails (int id)
+        public async Task<IActionResult> GetSingleWorkoutDetails (int id)
         {
             var workout = await _context.Workouts.FirstOrDefaultAsync(w => w.Id == id);
             if(workout == null)
