@@ -1,0 +1,27 @@
+﻿@model GetFit_Application.Models.Diet
+
+@{
+    ViewData["Title"] = "Create Diet";
+}
+
+<h2>Create Diet</h2>
+
+<form asp-action="CreateDiet" method="post">
+    <div>
+        <label asp-for="Food"></label>
+        <input asp-for="Food" class="form-control" />
+        <span asp-validation-for="Food" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Calories"></label>
+        <input asp-for="Calories" class="form-control" />
+        <span asp-validation-for="Calories" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Protein"></label>
+        <input asp-for="Protein" class="form-control" />
+        <span asp-validation-for="Protein" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

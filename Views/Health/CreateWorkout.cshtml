@@ -1,0 +1,27 @@
+﻿@model GetFit_Application.Models.Workout
+
+@{
+    ViewData["Title"] = "Create Workout";
+}
+
+<h2>Create Workout</h2>
+
+<form asp-action="CreateWorkout" method="post">
+    <div>
+        <label asp-for="Exercise"></label>
+        <input asp-for="Exercise" class="form-control" />
+        <span asp-validation-for="Exercise" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Reps"></label>
+        <input asp-for="Reps" class="form-control" />
+        <span asp-validation-for="Reps" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

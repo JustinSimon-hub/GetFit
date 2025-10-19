@@ -137,7 +137,7 @@ namespace GetFit_Application.Controllers
             {
                 _context.Entry(diet).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Diets));
+                return RedirectToAction(nameof(GetDiets));
             }
             return View(diet);
         }
@@ -162,7 +162,7 @@ namespace GetFit_Application.Controllers
                 _context.Diets.Remove(diet);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction(nameof(Diets));
+            return RedirectToAction(nameof(GetDiets));
         }
 
         // EDIT WORKOUT
@@ -186,7 +186,7 @@ namespace GetFit_Application.Controllers
             {
                 _context.Entry(workout).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Workouts));
+                return RedirectToAction(nameof(GetWorkouts));
             }
             return View(workout);
         }
@@ -211,7 +211,7 @@ namespace GetFit_Application.Controllers
                 _context.Workouts.Remove(workout);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction(nameof(Workouts));
+            return RedirectToAction(nameof(GetWorkouts));
         }
     }
 }
