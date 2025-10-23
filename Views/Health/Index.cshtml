@@ -4,58 +4,88 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h2>Diets</h2>
-<a asp-action="CreateDiet">Create New Diet</a>
-<table>
-    <thead>
-        <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th>Protein</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var diet in Model.Diets)
-        {
-            <tr>
-                <td>@diet.Food</td>
-                <td>@diet.Calories</td>
-                <td>@diet.Protein</td>
-                <td>
-                    <a asp-action="DietDetils" asp-route-id="@diet.Id">Details</a> |
-                    <a asp-action="EditDiet" asp-route-id="@diet.Id">Edit</a> |
-                    <a asp-action="DeleteDiet" asp-route-id="@diet.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h1>Gym Dashboard</h1>
 
-<h2>Workouts</h2>
-<a asp-action="CreateWorkout">Create New Workout</a>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Duration</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var workout in Model.Workouts)
-        {
+<!-- ======= DIETS SECTION ======= -->
+<section>
+    <h2>Diets</h2>
+    <a asp-controller="Health" asp-action="CreateDiet" class="btn btn-primary mb-3">Create New Diet</a>
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@workout.Exercise</td>
-                <td>@workout.Date.ToShortDateString()</td>
-                <td>@workout.PR</td>
-                <td>
-                    <a asp-action="SingleWorkoutDetails" asp-route-id="@workout.Id">Details</a> |
-                    <a asp-action="EditWorkout" asp-route-id="@workout.Id">Edit</a> |
-                    <a asp-action="DeleteWorkout" asp-route-id="@workout.Id">Delete</a>
-                </td>
+                <th>Food</th>
+                <th>Calories</th>
+                <th>Protein</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model.Diets != null && Model.Diets.Any())
+            {
+                foreach (var diet in Model.Diets)
+                {
+                    <tr>
+                        <td>@diet.Food</td>
+                        <td>@diet.Calories</td>
+                        <td>@diet.Protein</td>
+                        <td>
+                            <a asp-action="DietDetails" asp-route-id="@diet.Id" class="btn btn-info btn-sm">Details</a>
+                            <a asp-action="EditDiet" asp-route-id="@diet.Id" class="btn btn-warning btn-sm">Edit</a>
+                            <a asp-action="DeleteDiet" asp-route-id="@diet.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No diets available</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+<hr />
+
+<!-- ======= WORKOUTS SECTION ======= -->
+<section>
+    <h2>Workouts</h2>
+    <a asp-controller="Health" asp-action="CreateWorkout" class="btn btn-primary mb-3">Create New Workout</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                <th>Date</th>
+                <th>PR</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Workouts != null && Model.Workouts.Any())
+            {
+                foreach (var workout in Model.Workouts)
+                {
+                    <tr>
+                        <td>@workout.Exercise</td>
+                        <td>@workout.Date.ToShortDateString()</td>
+                        <td>@workout.PR</td>
+                        <td>
+                            <a asp-action="SingleWorkoutDetails" asp-route-id="@workout.Id" class="btn btn-info btn-sm">Details</a>
+                            <a asp-action="EditWorkout" asp-route-id="@workout.Id" class="btn btn-warning btn-sm">Edit</a>
+                            <a asp-action="DeleteWorkout" asp-route-id="@workout.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No workouts available</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
