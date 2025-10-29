@@ -32,7 +32,7 @@ namespace GetFit_Application
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Health}/{action=Index}/{id?}");
+                pattern: "{controller=Hea}/{action=Index}/{id?}");
 
             app.Run();
         }
