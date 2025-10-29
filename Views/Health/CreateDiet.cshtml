@@ -7,21 +7,30 @@
 <h2>Create Diet</h2>
 
 <form asp-action="CreateDiet" method="post">
-    <div>
-        <label asp-for="Food"></label>
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="Food" class="form-label"></label>
         <input asp-for="Food" class="form-control" />
         <span asp-validation-for="Food" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Calories"></label>
+
+    <div class="mb-3">
+        <label asp-for="Calories" class="form-label"></label>
         <input asp-for="Calories" class="form-control" />
         <span asp-validation-for="Calories" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Protein"></label>
+
+    <div class="mb-3">
+        <label asp-for="Protein" class="form-label"></label>
         <input asp-for="Protein" class="form-control" />
         <span asp-validation-for="Protein" class="text-danger"></span>
     </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
