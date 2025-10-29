@@ -9,15 +9,32 @@
 <!-- ======= DIETS SECTION ======= -->
 <section>
     <h2>Diets</h2>
-    <a asp-controller="Health" asp-action="CreateDiet" class="btn btn-primary mb-3">Create New Diet</a>
 
+    <!-- Inline Create Diet Form -->
+    <form asp-action="CreateDiet" method="post">
+        <div class="row g-2 mb-3">
+            <div class="col">
+                <input name="Food" class="form-control" placeholder="Food" />
+            </div>
+            <div class="col">
+                <input name="Calories" type="number" class="form-control" placeholder="Calories" />
+            </div>
+            <div class="col">
+                <input name="Protein" type="number" class="form-control" placeholder="Protein" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Add Diet</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Diets Table -->
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Food</th>
                 <th>Calories</th>
                 <th>Protein</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,18 +46,13 @@
                         <td>@diet.Food</td>
                         <td>@diet.Calories</td>
                         <td>@diet.Protein</td>
-                        <td>
-                            <a asp-action="DietDetails" asp-route-id="@diet.Id" class="btn btn-info btn-sm">Details</a>
-                            <a asp-action="EditDiet" asp-route-id="@diet.Id" class="btn btn-warning btn-sm">Edit</a>
-                            <a asp-action="DeleteDiet" asp-route-id="@diet.Id" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="4" class="text-center text-muted">No diets available</td>
+                    <td colspan="3" class="text-center text-muted">No diets available</td>
                 </tr>
             }
         </tbody>
@@ -52,15 +64,32 @@
 <!-- ======= WORKOUTS SECTION ======= -->
 <section>
     <h2>Workouts</h2>
-    <a asp-controller="Health" asp-action="CreateWorkout" class="btn btn-primary mb-3">Create New Workout</a>
 
+    <!-- Inline Create Workout Form -->
+    <form asp-action="CreateWorkout" method="post">
+        <div class="row g-2 mb-3">
+            <div class="col">
+                <input name="Exercise" class="form-control" placeholder="Exercise" />
+            </div>
+            <div class="col">
+                <input name="Date" type="date" class="form-control" />
+            </div>
+            <div class="col">
+                <input name="PR" type="number" class="form-control" placeholder="PR" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Add Workout</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Workouts Table -->
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Exercise</th>
                 <th>Date</th>
                 <th>PR</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -72,18 +101,13 @@
                         <td>@workout.Exercise</td>
                         <td>@workout.Date.ToShortDateString()</td>
                         <td>@workout.PR</td>
-                        <td>
-                            <a asp-action="SingleWorkoutDetails" asp-route-id="@workout.Id" class="btn btn-info btn-sm">Details</a>
-                            <a asp-action="EditWorkout" asp-route-id="@workout.Id" class="btn btn-warning btn-sm">Edit</a>
-                            <a asp-action="DeleteWorkout" asp-route-id="@workout.Id" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="4" class="text-center text-muted">No workouts available</td>
+                    <td colspan="3" class="text-center text-muted">No workouts available</td>
                 </tr>
             }
         </tbody>
